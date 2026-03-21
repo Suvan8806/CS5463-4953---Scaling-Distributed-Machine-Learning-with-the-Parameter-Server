@@ -1,5 +1,9 @@
 # Bibliography — CS 5463/4953 Term Project
-## Survey on Parameter Distribution and Synchronization in Distributed Machine Learning
+## Survey Title
+Survey on Distributed Machine Learning: Systems, Algorithms, and Scalability
+
+## Category
+Distributed Machine Learning — Parallelism Strategies, Communication, and Scalability
 
 ---
 

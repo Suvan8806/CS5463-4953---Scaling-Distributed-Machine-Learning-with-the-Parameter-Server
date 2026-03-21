@@ -5,37 +5,41 @@
 ---
 
 ## Survey Title
-Survey on Parameter Distribution and Synchronization Strategies in Distributed Machine Learning
+Survey on Distributed Machine Learning: Systems, Algorithms, and Scalability
 
 ## Category
-Distributed Deep Learning — Parameter Server Architectures and Gradient Synchronization
+Distributed Machine Learning — Parallelism Strategies, Communication, and Scalability
 
 ---
 
 ## Problem Statement
 
-Training large-scale machine learning models requires distributing both data and computation across many machines. A central and unsolved tension in this setting is how to keep model parameters, which may number in the billions, synchronized across worker nodes efficiently, without sacrificing training accuracy or system fault tolerance. Two dominant paradigms have emerged to address this: the **Parameter Server (PS)** architecture, where dedicated server nodes hold global parameters that workers push gradients to and pull updates from; and **collective communication** approaches like AllReduce, where workers synchronize directly with each other in a ring or tree topology. Each approach makes fundamentally different trade-offs between communication cost, consistency guarantees, and fault tolerance. This survey examines how these trade-offs have been navigated across the history of distributed ML systems, with a focus on the design of consistency models — from fully synchronous Bulk Synchronous Processing (BSP), to bounded-delay models like Stale Synchronous Parallel (SSP), to fully asynchronous approaches.
+As machine learning models and datasets continue to grow in scale, training on a single machine has become computationally infeasible. Distributed machine learning (DML) addresses this by spreading both data and computation across many machines — but doing so efficiently introduces a set of fundamental challenges: How should model parameters be partitioned and shared? How should workers communicate gradient updates? How do we balance synchronization correctness against system performance? And how do we handle failures at scale? These questions have driven a rich body of research spanning distributed systems, parallel computing, and machine learning theory. This survey examines the landscape of distributed ML — from foundational parallelism concepts and early systems to modern frameworks capable of training models with hundreds of billions of parameters across thousands of GPUs.
 
 ---
 
 ## Scope of the Survey
 
-This survey focuses specifically on **how model parameters are distributed and kept synchronized** across nodes during distributed training — a narrower and more distinct scope than a general survey of distributed ML systems. It will cover: (i) early key-value based parameter sharing architectures; (ii) the third-generation Parameter Server framework and its consistency, communication, and fault tolerance mechanisms; (iii) competing synchronization strategies including SSP, BSP, and asynchronous SGD; (iv) AllReduce-based alternatives to the PS paradigm such as Horovod; (v) practical frameworks including TensorFlow, PyTorch Distributed, and Petuum; and (vi) the convergence and correctness trade-offs of relaxed consistency models. The survey will synthesize existing literature, compare design trade-offs across systems, and identify open challenges in parameter synchronization at scale.
+This survey covers the **broad landscape of distributed machine learning**, with particular attention to the systems and algorithmic techniques that enable large-scale training. It is grounded in the Parameter Server (PS) framework — specifically the Li et al. OSDI 2014 paper *"Scaling Distributed Machine Learning with the Parameter Server"* — as a central case study, but extends outward to survey the wider field. The survey will cover: (i) foundational parallelism strategies — data parallelism, model parallelism, and pipeline parallelism; (ii) parameter server architectures and their consistency models (BSP, SSP, asynchronous); (iii) AllReduce-based communication as an alternative to the PS paradigm; (iv) gradient compression and communication efficiency techniques; (v) modern large-scale training frameworks including TensorFlow, Horovod, PyTorch Distributed, DeepSpeed, and Megatron-LM; and (vi) open challenges in fault tolerance, scalability, and convergence at scale. The survey aims to synthesize existing literature and map the evolution of distributed ML from early parameter servers to today's trillion-parameter training systems.
 
 ---
 
 ## Key Topics to be Covered
 
-- Parameter server architecture: server groups, worker groups, scheduler nodes, and the server manager
-- Range-based push/pull communication and vectorized (key, value) parameter representation
-- Consistency models: sequential (BSP), eventual consistency, bounded delay (SSP), and asynchronous SGD
-- Fault tolerance mechanisms: vector clocks, chain replication, and consistent hashing
-- AllReduce vs. Parameter Server: communication topology trade-offs
-- Gradient aggregation algorithms: distributed subgradient descent and delayed block proximal gradient
-- Practical frameworks: TensorFlow, Horovod, PyTorch Distributed, Petuum, DistBelief
-- Convergence guarantees and correctness under relaxed consistency
+- Data parallelism, model parallelism, and pipeline parallelism
+- Parameter server architecture: server groups, worker nodes, push/pull communication
+- Consistency models: BSP, SSP, eventual consistency, and asynchronous SGD
+- AllReduce vs. Parameter Server: topology and communication trade-offs
+- Gradient compression: sparsification, quantization, and low-rank methods
+- Fault tolerance: vector clocks, chain replication, and checkpoint/restart
+- Modern frameworks: TensorFlow, Horovod, PyTorch DDP, DeepSpeed/ZeRO, Megatron-LM
+- Scaling laws and convergence guarantees under relaxed consistency
 
 ---
+
+## Primary Reference Paper
+Li, M., Andersen, D. G., Park, J. W., Smola, A. J., et al. (2014). *Scaling Distributed Machine Learning with the Parameter Server.* OSDI 2014.
+The paper and presentation slides are included in this repository as foundational reference material.
 
 ## GitHub Repository
 All papers, slides, and bibliography are available at:
